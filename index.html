@@ -1,0 +1,507 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayesha | Creative Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --black: #090909;
+            --card: #141414;
+            --gold: #d4af37;
+            --white: #f7f4ec;
+            --muted: #b5b0a4;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(9, 9, 9, 0.95);
+            border-bottom: 1px solid #292318;
+            backdrop-filter: blur(12px);
+        }
+
+        .navbar {
+            min-height: 76px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            color: var(--gold);
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 570px;
+            display: flex;
+            align-items: center;
+            padding: 90px 0;
+            background:
+                radial-gradient(ellipse at 85% 40%,
+                #382b1050, transparent 45%);
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1.15;
+            max-width: 850px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 620px;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gold);
+            color: #090909;
+            padding: 13px 25px;
+            border: 1px solid var(--gold);
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            margin-left: 10px;
+        }
+
+        /* Sections */
+        section {
+            padding: 85px 0;
+            scroll-margin-top: 75px;
+        }
+
+        .section-title {
+            font-size: clamp(30px, 4vw, 42px);
+            margin-bottom: 12px;
+        }
+
+        .section-title span {
+            color: var(--gold);
+        }
+
+        .section-intro {
+            color: var(--muted);
+            max-width: 650px;
+            margin-bottom: 35px;
+        }
+
+        .about-box {
+            border: 1px solid #332b19;
+            background: linear-gradient(135deg, #171717, #0d0d0d);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .about-box p {
+            color: var(--muted);
+            margin-top: 12px;
+        }
+
+        /* Skills */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--card);
+            padding: 27px;
+            border: 1px solid #29251b;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: var(--gold);
+        }
+
+        .card .number {
+            color: var(--gold);
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* Projects */
+        .project-tag {
+            display: inline-block;
+            color: var(--gold);
+            background: #332b1938;
+            border: 1px solid #4b3c1d;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        /* Contact */
+        .contact-box {
+            background: #15130e;
+            border: 1px solid #46381c;
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            margin: 15px auto 25px;
+        }
+
+        footer {
+            padding: 25px 0;
+            border-top: 1px solid #292318;
+            color: var(--muted);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease,
+                        transform 0.7s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 16px 0;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 14px;
+                font-size: 14px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 80px 0;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .btn-outline {
+                margin: 12px 0 0;
+            }
+
+            .about-box,
+            .contact-box {
+                padding: 23px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container navbar">
+            <a href="#home" class="logo">AYESHA.</a>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero" id="home">
+            <div class="container reveal">
+                <div class="eyebrow">Creative Portfolio</div>
+
+                <h1>
+                    Hi, I'm Ayesha.<br>
+                    <span>UI/UX & Web Designer</span>
+                </h1>
+
+                <p>
+                    I create clean, modern and user-friendly
+                    digital experiences. I enjoy turning creative
+                    ideas into beautiful website and app designs.
+                </p>
+
+                <a class="btn" href="#projects">Explore My Work</a>
+                <a class="btn btn-outline" href="#about">About Me</a>
+            </div>
+        </header>
+
+        <section id="about">
+            <div class="container reveal">
+                <div class="eyebrow">Get to know me</div>
+                <h2 class="section-title">About <span>Me</span></h2>
+
+                <div class="about-box">
+                    <h3>A creative learner with big goals.</h3>
+
+                    <p>
+                        My name is Hafiza Ayesha Sajjad.
+                        I am a DAE CIT third-year student
+                        interested in UI/UX design and web development.
+                    </p>
+
+                    <p>
+                        I am learning how to build attractive websites
+                        and design useful mobile app interfaces.
+                        My goal is to improve my skills and become
+                        a professional designer.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container reveal">
+                <div class="eyebrow">What I can do</div>
+                <h2 class="section-title">My <span>Skills</span></h2>
+                <p class="section-intro">
+                    These are the tools and technologies I am learning
+                    and using in my projects.
+                </p>
+
+                <div class="grid">
+                    <div class="card">
+                        <div class="number">01</div>
+                        <h3>Figma</h3>
+                        <p>
+                            Creating UI layouts, mobile app screens,
+                            prototypes and interactive designs.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="number">02</div>
+                        <h3>HTML</h3>
+                        <p>
+                            Building the structure and content
+                            of web pages.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="number">03</div>
+                        <h3>CSS</h3>
+                        <p>
+                            Styling websites with colors, layouts,
+                            responsive designs and animations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container reveal">
+                <div class="eyebrow">Selected work</div>
+                <h2 class="section-title">My <span>Projects</span></h2>
+                <p class="section-intro">
+                    A selection of projects I have worked on
+                    while learning design and web development.
+                </p>
+
+                <div class="grid">
+                    <article class="card">
+                        <span class="project-tag">Web Design</span>
+                        <h3>VELORA Fashion Website</h3>
+                        <p>
+                            A fashion shopping website concept
+                            with a modern black and gold theme.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <span class="project-tag">UI Design</span>
+                        <h3>Login Page</h3>
+                        <p>
+                            A simple login interface designed
+                            with a clean and organized layout.
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <span class="project-tag">UI Design</span>
+                        <h3>Profile Page</h3>
+                        <p>
+                            A profile screen concept focusing
+                            on layout, usability and visual style.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container reveal">
+                <div class="contact-box">
+                    <div class="eyebrow">Let's connect</div>
+
+                    <h2 class="section-title">
+                        Have a <span>Project?</span>
+                    </h2>
+
+                    <p>
+                        I am always interested in learning,
+                        creating and exploring new design ideas.
+                    </p>
+
+                    <a class="btn"
+                       href="mailto:">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                &copy; <span id="year"></span>
+                Ayesha | Personal Portfolio
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        const revealElements = document.querySelectorAll(".reveal");
+
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver(
+                function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.12 }
+            );
+
+            revealElements.forEach(function(element) {
+                observer.observe(element);
+            });
+        } else {
+            revealElements.forEach(function(element) {
+                element.classList.add("show");
+            });
+        }
+    </script>
+
+</body>
+</html>
